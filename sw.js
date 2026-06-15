@@ -1,8 +1,15 @@
-/* HeritaGen Service Worker — Tam Offline Destek */
-const CACHE = 'heritagen-v1';
+/* HeritaGen Service Worker — GitHub Pages */
+const CACHE = 'heritagen-v2';
+const BASE  = '/heritagen/';
 const FILES = [
-  './',
-  './heritagen_offline.html'
+  BASE,
+  BASE + 'index.html',
+  BASE + 'manifest.json',
+  BASE + 'icon-72.png',
+  BASE + 'icon-96.png',
+  BASE + 'icon-128.png',
+  BASE + 'icon-192.png',
+  BASE + 'icon-512.png',
 ];
 
 self.addEventListener('install', e => {
@@ -24,7 +31,7 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   e.respondWith(
     caches.match(e.request).then(r => r || fetch(e.request).catch(() =>
-      caches.match('./heritagen_offline.html')
+      caches.match(BASE + 'index.html')
     ))
   );
 });
